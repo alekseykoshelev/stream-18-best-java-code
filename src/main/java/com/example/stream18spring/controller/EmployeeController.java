@@ -2,16 +2,16 @@ package com.example.stream18spring.controller;
 
 import com.example.stream18spring.model.Employee;
 import com.example.stream18spring.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
+    private final static Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     private final EmployeeService service;
 
@@ -37,5 +37,11 @@ public class EmployeeController {
     @GetMapping("/all")
     public Collection<Employee> remove() {
         return service.getEmployees();
+    }
+
+    @ExceptionHandler({Exception.class})
+    private void handle(Exception e) throws Exception {
+        logger.error("Exception:", e);
+        throw e;
     }
 }
