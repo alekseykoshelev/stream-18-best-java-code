@@ -26,12 +26,11 @@ public class DepartmentService {
                 .orElse(null);
     }
 
-    public Employee min(int dept) {
+    public Optional<Employee> min(int dept) {
         return employeeService.getEmployees()
                 .stream()
                 .filter(e -> e.getDepartment() == dept)
-                .min(Comparator.comparing(Employee::getSalary))
-                .orElse(null);
+                .min(Comparator.comparing(Employee::getSalary));
     }
 
     public Collection<Employee> allByDept(int dept) {

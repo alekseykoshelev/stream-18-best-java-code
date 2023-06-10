@@ -2,6 +2,7 @@ package com.example.stream18spring.controller;
 
 import com.example.stream18spring.model.Employee;
 import com.example.stream18spring.service.DepartmentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +28,8 @@ public class DepartmentController {
     }
 
     @GetMapping("/min-salary")
-    public Employee min(@RequestParam int departmentId) {
-        return service.min(departmentId);
+    public ResponseEntity<Employee> min(@RequestParam int departmentId) {
+        return ResponseEntity.of(service.min(departmentId));
     }
 
     @GetMapping(value = "/all", params = "departmentId")
